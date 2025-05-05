@@ -1,4 +1,4 @@
-module github.com/dr0dzd/project-prot
+module github.com/dr0dzd/project-protos
 
 go 1.24.2
 
