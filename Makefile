@@ -8,4 +8,4 @@ generate:
 	  $(PROTOS)
 
 clean:
-	find . -name "*.pb.go" -delete
+	find $(OUT_DIR) -name "*.pb.go" -delete
