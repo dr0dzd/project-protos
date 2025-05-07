@@ -4,15 +4,11 @@ package user;
 
 option go_package = "github.com/dr0dzd/project-protos/proto_gen/user/userpb";
 
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
 message User {
   string id = 1;
   string email = 2;
-  google.protobuf.Timestamp created_at = 3;
-  google.protobuf.Timestamp updated_at = 4;
-  google.protobuf.Timestamp deleted_at = 5; // nil если не удалён
 }
 
 // Create
