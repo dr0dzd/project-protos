@@ -8,7 +8,6 @@ package userpb
 
 import (
 	empty "github.com/golang/protobuf/ptypes/empty"
-	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -27,9 +26,6 @@ type User struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	CreatedAt     *timestamp.Timestamp   `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     *timestamp.Timestamp   `protobuf:"bytes,4,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	DeletedAt     *timestamp.Timestamp   `protobuf:"bytes,5,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"` // nil если не удалён
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -76,27 +72,6 @@ func (x *User) GetEmail() string {
 		return x.Email
 	}
 	return ""
-}
-
-func (x *User) GetCreatedAt() *timestamp.Timestamp {
-	if x != nil {
-		return x.CreatedAt
-	}
-	return nil
-}
-
-func (x *User) GetUpdatedAt() *timestamp.Timestamp {
-	if x != nil {
-		return x.UpdatedAt
-	}
-	return nil
-}
-
-func (x *User) GetDeletedAt() *timestamp.Timestamp {
-	if x != nil {
-		return x.DeletedAt
-	}
-	return nil
 }
 
 // Create
@@ -504,16 +479,10 @@ var File_user_user_proto protoreflect.FileDescriptor
 
 const file_user_user_proto_rawDesc = "" +
 	"\n" +
-	"\x0fuser/user.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xdd\x01\n" +
+	"\x0fuser/user.proto\x12\x04user\x1a\x1bgoogle/protobuf/empty.proto\",\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email\x129\n" +
-	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
-	"\n" +
-	"updated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x129\n" +
-	"\n" +
-	"deleted_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\")\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\")\n" +
 	"\x11CreateUserRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"4\n" +
 	"\x12CreateUserResponse\x12\x1e\n" +
@@ -570,32 +539,28 @@ var file_user_user_proto_goTypes = []any{
 	(*UpdateUserRequest)(nil),   // 7: user.UpdateUserRequest
 	(*UpdateUserResponse)(nil),  // 8: user.UpdateUserResponse
 	(*DeleteUserRequest)(nil),   // 9: user.DeleteUserRequest
-	(*timestamp.Timestamp)(nil), // 10: google.protobuf.Timestamp
-	(*empty.Empty)(nil),         // 11: google.protobuf.Empty
+	(*empty.Empty)(nil),         // 10: google.protobuf.Empty
 }
 var file_user_user_proto_depIdxs = []int32{
-	10, // 0: user.User.created_at:type_name -> google.protobuf.Timestamp
-	10, // 1: user.User.updated_at:type_name -> google.protobuf.Timestamp
-	10, // 2: user.User.deleted_at:type_name -> google.protobuf.Timestamp
-	0,  // 3: user.CreateUserResponse.user:type_name -> user.User
-	0,  // 4: user.GetUserResponse.user:type_name -> user.User
-	0,  // 5: user.GetAllUsersResponse.users:type_name -> user.User
-	0,  // 6: user.UpdateUserResponse.user:type_name -> user.User
-	1,  // 7: user.UserService.CreateUser:input_type -> user.CreateUserRequest
-	3,  // 8: user.UserService.GetUser:input_type -> user.GetUserRequest
-	5,  // 9: user.UserService.GetAllUsers:input_type -> user.GetAllUsersRequest
-	7,  // 10: user.UserService.UpdateUser:input_type -> user.UpdateUserRequest
-	9,  // 11: user.UserService.DeleteUser:input_type -> user.DeleteUserRequest
-	2,  // 12: user.UserService.CreateUser:output_type -> user.CreateUserResponse
-	4,  // 13: user.UserService.GetUser:output_type -> user.GetUserResponse
-	6,  // 14: user.UserService.GetAllUsers:output_type -> user.GetAllUsersResponse
-	8,  // 15: user.UserService.UpdateUser:output_type -> user.UpdateUserResponse
-	11, // 16: user.UserService.DeleteUser:output_type -> google.protobuf.Empty
-	12, // [12:17] is the sub-list for method output_type
-	7,  // [7:12] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	0,  // 0: user.CreateUserResponse.user:type_name -> user.User
+	0,  // 1: user.GetUserResponse.user:type_name -> user.User
+	0,  // 2: user.GetAllUsersResponse.users:type_name -> user.User
+	0,  // 3: user.UpdateUserResponse.user:type_name -> user.User
+	1,  // 4: user.UserService.CreateUser:input_type -> user.CreateUserRequest
+	3,  // 5: user.UserService.GetUser:input_type -> user.GetUserRequest
+	5,  // 6: user.UserService.GetAllUsers:input_type -> user.GetAllUsersRequest
+	7,  // 7: user.UserService.UpdateUser:input_type -> user.UpdateUserRequest
+	9,  // 8: user.UserService.DeleteUser:input_type -> user.DeleteUserRequest
+	2,  // 9: user.UserService.CreateUser:output_type -> user.CreateUserResponse
+	4,  // 10: user.UserService.GetUser:output_type -> user.GetUserResponse
+	6,  // 11: user.UserService.GetAllUsers:output_type -> user.GetAllUsersResponse
+	8,  // 12: user.UserService.UpdateUser:output_type -> user.UpdateUserResponse
+	10, // 13: user.UserService.DeleteUser:output_type -> google.protobuf.Empty
+	9,  // [9:14] is the sub-list for method output_type
+	4,  // [4:9] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_user_user_proto_init() }
