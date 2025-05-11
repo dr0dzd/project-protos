@@ -13,19 +13,13 @@ message Task {
   string  user_id = 4;
 }
 
-message TaskResponse {
-  string  id      = 1;
-  string  title   = 2;
-  bool    is_done = 3;
-}
-
 // Create
 message CreateTaskRequest {
   string user_id  = 1;
   string title    = 2;
 }
 message CreateTaskResponse {
-  TaskResponse task = 1;
+  Task task = 1;
 }
 
 // Get
@@ -34,14 +28,14 @@ message GetTaskRequest {
 }
 
 message GetTaskResponse {
-  TaskResponse task = 1;
+  Task task = 1;
 }
 
 // ListTasks
 message ListTasksRequest {}
 
 message ListTasksResponse {
-  repeated TaskResponse tasks = 1;
+  repeated Task tasks = 1;
 }
 
 //ListTasksByUserID
@@ -56,7 +50,7 @@ message UpdateTaskRequest {
   bool    is_done = 3;
 }
 message UpdateTaskResponse {
-  TaskResponse task = 1;
+  Task task = 1;
 }
 
 // Delete
