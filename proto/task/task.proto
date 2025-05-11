@@ -4,57 +4,71 @@ package task;
 
 option go_package = "github.com/dr0dzd/project-protos/proto_gen/task;taskpb";
 
+import "google/protobuf/empty.proto";
+
 message Task {
-  uint32 id = 1;
-  string title = 2;
+  string  id      = 1;
+  string  title   = 2;
+  bool    is_done = 3;
+  string  user_id = 4;
+}
+
+message TaskResponse {
+  string  id      = 1;
+  string  title   = 2;
+  bool    is_done = 3;
 }
 
 // Create
 message CreateTaskRequest {
-  string title = 1;
+  string user_id  = 1;
+  string title    = 2;
 }
 message CreateTaskResponse {
-  Task task = 1;
+  TaskResponse task = 1;
 }
 
 // Get
 message GetTaskRequest {
-  uint32 id = 1;
+  string id = 1;
 }
 
 message GetTaskResponse {
-  Task task = 1;
+  TaskResponse task = 1;
 }
 
-// List
+// ListTasks
 message ListTasksRequest {}
 
 message ListTasksResponse {
-  repeated Task tasks = 1;
+  repeated TaskResponse tasks = 1;
+}
+
+//ListTasksByUserID
+message ListTasksByUserRequest{
+  string user_id = 1;
 }
 
 // Update
 message UpdateTaskRequest {
-  uint32 id = 1;
-  string new_title = 2;
+  string  id      = 1;
+  string  title   = 2;
+  bool    is_done = 3;
 }
 message UpdateTaskResponse {
-  Task task = 1;
+  TaskResponse task = 1;
 }
 
 // Delete
 message DeleteTaskRequest {
-  uint32 id = 1;
-}
-
-message DeleteTaskResponse {
-  Task task = 1;
+  string id = 1;
 }
 
 service TaskService {
-  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
-  rpc GetTask(GetTaskRequest) returns (GetTaskResponse);
-  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse);
-  rpc UpdateTask(UpdateTaskRequest) returns (UpdateTaskResponse);
-  rpc DeleteTask(DeleteTaskRequest) returns (DeleteTaskResponse);
+  rpc CreateTask      (CreateTaskRequest)       returns (CreateTaskResponse);
+  rpc GetTask         (GetTaskRequest)          returns (GetTaskResponse);
+  rpc ListTasks       (ListTasksRequest)        returns (ListTasksResponse);
+  rpc ListTasksByUser (ListTasksByUserRequest)  returns (ListTasksResponse);
+  rpc UpdateTask      (UpdateTaskRequest)       returns (UpdateTaskResponse);
+  rpc DeleteTask      (DeleteTaskRequest)       returns (google.protobuf.Empty);
 }
